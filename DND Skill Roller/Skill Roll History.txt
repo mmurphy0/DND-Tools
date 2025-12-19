@@ -1,0 +1,16 @@
+Character: Dravok
+Strength: 14
+Dexterity: 13
+Constitution: 10
+Intelligence: 15
+Wisdom: 17
+Charisma: 12
+----------
+Character: Alvis
+Strength: 10
+Dexterity: 15
+Constitution: 12
+Intelligence: 10
+Wisdom: 16
+Charisma: 17
+----------
