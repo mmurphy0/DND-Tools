@@ -26,5 +26,4 @@ python3 dnddiceroller.py
 
 -> Tkinter
 
-##
-This is the final version of the program
+## This is the final version of the program
