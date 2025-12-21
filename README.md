@@ -11,9 +11,9 @@ A Python Tkinter which lets users virtually roll their dice for actions in Dunge
 -> User can then click the back button to return to the home page
 
 ## Installation
-git clone <repo>
+git clone (repo)
 
-cd <repo>
+cd (repo)
 
 python dnddiceroller.py
 
