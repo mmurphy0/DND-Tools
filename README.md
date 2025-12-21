@@ -15,11 +15,11 @@ git clone (repo)
 
 cd (repo)
 
+### Windows
 python dnddiceroller.py
 
-or
-
-python3 dnddiceroller.py (depending on operating system)
+### MacOS & Linux
+python3 dnddiceroller.py
 
 ## Tech Stack
 -> Python
