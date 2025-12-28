@@ -35,13 +35,17 @@ python3 dnddiceroller.py
 A Python Tkinter App which rolls the stats when creating a d&d character. The program does not add character-specific bonuses which the user is informed about at the end of the program
 
 ## Usage
--> The welcome page has a start button to advance onto entering your characters name in the following window
+-> The start page has a start button to advance onto entering your characters name in the following window
 
 -> The program checks that a name has been entered before moving onto getting the stats for the user. if a name has not been entered a messagebox appears telling the user they must enter a name for their character
 
+-> Then, a window is displayed where the user must enter their characters skill bonuses for each skill. no bonus = 0
+
+-> The program checks that only numbers were entered and a value has been entered into the entry box. if the values did not pass the validation check, the user is informed about this through messageboxes. letters and symbols used = 'Only numbers can be entered', empty entry boxes = 'All text boxes must have a number in. No bonus = 0'
+
 -> The next window shows the stats that have been rolled for the character. Below is an export button to export these stats to Skill Roll History.txt so the user can keep them saved with their character name on the document so it is easy to find. Also there is a back button to take the user back to the welcome page
 
--> When the user clicks the export button they are reminded that character bonuses need to be done by them.
+-> The user is directed back to the start page
 
 ## Tech Stack
 -> Python
