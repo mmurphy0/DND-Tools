@@ -15,7 +15,7 @@ def saveskills():
 
 def showskills():
     skills_win = Toplevel()
-    skills_win.title('DnD Stat Roller')
+    skills_win.title('DnD Skill Roller')
     skills_win.geometry('220x230+0+0')
 
     strength_label = tk.Label(
@@ -147,13 +147,30 @@ def rollskills():
     name_entry_win.destroy()
     showskills()
 
+def add_characterbonuses():
+    add_characterbonuses_win = Toplevel()
+    add_characterbonuses_win.geometry('250x400+0+0')
+    add_characterbonuses_win.resizable(False,False)
+    add_characterbonuses_win.title('DND Skill Roller')
+
+    add_characterbonuses_title = tk.Label(
+        add_characterbonuses_win,
+        text='Add Character Bonuses',
+        font=('Arial',20,'bold')
+    )
+    add_characterbonuses_title.grid(
+        row=1,
+        column=1,
+        columnspan=2
+    )
+
 def name_entry_check():
     global name
     
     name = name_entry_win_entry.get()
 
     if name.strip():
-        rollskills()
+        add_characterbonuses()
     else:
         messagebox.showinfo('Error','A Name must be entered')
 
@@ -183,7 +200,7 @@ def name_entry():
     name_entry_win_submit_btn.pack()
 
 root = tk.Tk()
-root.title('Welcome')
+root.title('DND Skill Roller')
 root.geometry('195x87+0+0')
 
 root_title = tk.Label(
