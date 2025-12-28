@@ -16,9 +16,7 @@ def saveskills():
 def showskills():
     skills_win = Toplevel()
     skills_win.title('DnD Stat Roller')
-    skills_win.geometry('220x230')
-    skills_win.minsize(220,230)
-    skills_win.maxsize(220,230)
+    skills_win.geometry('220x230+0+0')
 
     strength_label = tk.Label(
         skills_win,
@@ -163,10 +161,8 @@ def name_entry():
     global name_entry_win_entry, name_entry_win
     
     name_entry_win = Toplevel()
-    name_entry_win.geometry('285x80')
+    name_entry_win.geometry('285x80+0+0')
     name_entry_win.title('DND Skill Roller')
-    name_entry_win.minsize(285,80)
-    name_entry_win.maxsize(285,80)
 
     name_entry_win_label = tk.Label(
         name_entry_win,
@@ -188,9 +184,7 @@ def name_entry():
 
 root = tk.Tk()
 root.title('Welcome')
-root.geometry('195x87')
-root.minsize(195,87)
-root.maxsize(195,87)
+root.geometry('195x87+0+0')
 
 root_title = tk.Label(
     root,
