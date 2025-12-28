@@ -2,21 +2,20 @@ import random, sys, time
 import tkinter as tk
 from tkinter import messagebox, Toplevel
 
-#ToDo:
-# add name entry after the continue button before rolling
-#replace continue button on skills_win with export button
 
 def saveskills():
     with open('DND Skill Roller/Skill Roll History.txt','a') as file:
         file.write('Character: ' + str(name) + '\n' + 'Strength: ' + str(strength_sum) + '\n' + 'Dexterity: ' + str(dexterity_sum) + '\n' + 'Constitution: ' + str(constitution_sum) + '\n' + 'Intelligence: ' + str(intelligence_sum) + '\n' + 'Wisdom: ' + str(wisdom_sum) + '\n' + 'Charisma: ' + str(charisma_sum) + '\n' + '----------' + '\n')
     
-    messagebox.showinfo('Reminder!','Do not forget to add any stat bonuses your character has') 
+    messagebox.showinfo('Confirmation','Character Skills successfully saved') 
     sys.exit()
+
 
 def showskills():
     skills_win = Toplevel()
     skills_win.title('DnD Skill Roller')
     skills_win.geometry('220x230+0+0')
+    skills_win.resizable(False,False)
 
     strength_label = tk.Label(
         skills_win,
@@ -77,6 +76,7 @@ def showskills():
         command=skills_win.destroy
     )
     back_button.pack()
+
 
 def rollskills():
     global strength_sum, dexterity_sum, constitution_sum, intelligence_sum, wisdom_sum, charisma_sum
@@ -147,7 +147,10 @@ def rollskills():
     name_entry_win.destroy()
     showskills()
 
+
 def add_characterbonuses():
+    global add_characterbonuses_win, strength_bonus, dexterity_bonus, constitution_bonus, intelligence_bonus, wisdom_bonus, charisma_bonus
+
     add_characterbonuses_win = Toplevel()
     add_characterbonuses_win.geometry('250x400+0+0')
     add_characterbonuses_win.resizable(False,False)
@@ -164,6 +167,147 @@ def add_characterbonuses():
         columnspan=2
     )
 
+    add_characterbonuses_info = tk.Label(
+        add_characterbonuses_win,
+        text='No Bonus = 0',
+        font=('Arial',15)
+    )
+    add_characterbonuses_info.grid(
+        row=3,
+        column=1,
+        columnspan=2
+    )
+
+    strength_label = tk.Label(
+        add_characterbonuses_win,
+        text='Strength:',
+        font=('Arial',15)
+    )
+    strength_label.grid(
+        row=5,
+        column=1
+    )
+    strength_bonus = tk.Entry(
+        add_characterbonuses_win,
+        font=('Arial'),
+        width=5
+    )
+    strength_bonus.grid(
+        row=5,
+        column=2
+    )
+
+    dexterity_label = tk.Label(
+        add_characterbonuses_win,
+        text='Dexterity:',
+        font=('Arial',15)
+    )
+    dexterity_label.grid(
+        row=6,
+        column=1
+    )
+    dexterity_bonus = tk.Entry(
+        add_characterbonuses_win,
+        font=('Arial'),
+        width=5
+    )
+    dexterity_bonus.grid(
+        row=6,
+        column=2
+    )
+
+    constitution_label = tk.Label(
+        add_characterbonuses_win,
+        text='Constitution:',
+        font=('Arial',15)
+    )
+    constitution_label.grid(
+        row=7,
+        column=1
+    )
+    constitution_bonus = tk.Entry(
+        add_characterbonuses_win,
+        font=('Arial'),
+        width=5
+    )
+    constitution_bonus.grid(
+        row=7,
+        column=2
+    )
+
+    intelligence_label = tk.Label(
+        add_characterbonuses_win,
+        text='Intelligence:',
+        font=('Arial',15)
+    )
+    intelligence_label.grid(
+        row=8,
+        column=2
+    )
+    intelligence_bonus = tk.Entry(
+        add_characterbonuses_win,
+        font=('Arial'),
+        width=5
+    )
+    intelligence_bonus.grid(
+        row=8,
+        column=2
+    )
+
+    wisdom_label = tk.Label(
+        add_characterbonuses_win,
+        text='Wisdom:',
+        font=('Arial',15)
+    )
+    wisdom_label.grid(
+        row=9,
+        column=1
+    )
+    wisdom_bonus = tk.Entry(
+        add_characterbonuses_win,
+        text='Wisdom:',
+        font=('Arial')
+    )
+    wisdom_bonus.grid(
+        row=9,
+        column=2
+    )
+
+    charisma_label = tk.Label(
+        add_characterbonuses_win,
+        text='Charisma:',
+        font=('Arial')
+    )
+    charisma_label.grid(
+        row=10,
+        column=1
+    )
+    charisma_bonus = tk.Entry(
+        add_characterbonuses_win,
+        font=('Arial'),
+        width=5
+    )
+    charisma_bonus.grid(
+        row=10,
+        column=2
+    )
+
+    continue_button = tk.Button(
+        add_characterbonuses_win,
+        text='Continue',
+        font=('Arial'),
+        width=20,
+        command=skillbonus_check
+    )
+    continue_button.grid(
+        row=12,
+        column=1,
+        columnspan=2
+    )
+
+    name_entry_win.destroy()
+
+
 def name_entry_check():
     global name
     
@@ -174,11 +318,13 @@ def name_entry_check():
     else:
         messagebox.showinfo('Error','A Name must be entered')
 
+
 def name_entry():
     global name_entry_win_entry, name_entry_win
     
     name_entry_win = Toplevel()
     name_entry_win.geometry('285x80+0+0')
+    name_entry_win.resizable(False,False)
     name_entry_win.title('DND Skill Roller')
 
     name_entry_win_label = tk.Label(
@@ -199,9 +345,11 @@ def name_entry():
     )
     name_entry_win_submit_btn.pack()
 
+
 root = tk.Tk()
 root.title('DND Skill Roller')
 root.geometry('195x87+0+0')
+root.resizable(False,False)
 
 root_title = tk.Label(
     root,
