@@ -53,4 +53,4 @@ A Python Tkinter App which rolls the stats when creating a d&d character. The pr
 -> Tkinter
 
 ## Future Updates
--> Let users enter character bonuses before rolling stats
+-> Improve GUI
