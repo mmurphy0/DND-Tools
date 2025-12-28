@@ -1,6 +1,18 @@
-import random, sys, time
+import random, sys
 import tkinter as tk
 from tkinter import messagebox, Toplevel
+
+def reset():
+    global strength_bonus, dexterity_bonus, constitution_bonus, intelligence_bonus, wisdom_bonus, charisma_bonus
+    
+    strength_bonus = 0
+    dexterity_bonus = 0
+    constitution_bonus = 0
+    intelligence_bonus = 0
+    wisdom_bonus = 0
+    charisma_bonus = 0
+
+    skills_win.destroy()
 
 
 def saveskills():
@@ -8,10 +20,12 @@ def saveskills():
         file.write('Character: ' + str(name) + '\n' + 'Strength: ' + str(strength_sum) + '\n' + 'Dexterity: ' + str(dexterity_sum) + '\n' + 'Constitution: ' + str(constitution_sum) + '\n' + 'Intelligence: ' + str(intelligence_sum) + '\n' + 'Wisdom: ' + str(wisdom_sum) + '\n' + 'Charisma: ' + str(charisma_sum) + '\n' + '----------' + '\n')
     
     messagebox.showinfo('Confirmation','Character Skills successfully saved') 
-    sys.exit()
+    reset()
 
 
 def showskills():
+    global skills_win
+
     skills_win = Toplevel()
     skills_win.title('DnD Skill Roller')
     skills_win.geometry('220x230+0+0')
@@ -88,6 +102,13 @@ def rollskills():
     wisdom_sum = 0
     charisma_sum = 0
 
+    strength_bonus_int = strength_bonus.get()
+    dexterity_bonus_int = dexterity_bonus.get()
+    constitution_bonus_int = constitution_bonus.get()
+    intelligence_bonus_int = intelligence_bonus.get()
+    wisdom_bonus_int = wisdom_bonus.get()
+    charisma_bonus_int = charisma_bonus.get()
+
     dice = list(range(1,7))
 
     strength = []
@@ -97,7 +118,7 @@ def rollskills():
     strength.sort()
     strength.pop(0)
     for i in strength:
-        strength_sum = i + strength_sum
+        strength_sum = i + strength_sum + int(strength_bonus_int)
 
     dexterity = []
     for i in range(4):
@@ -106,7 +127,7 @@ def rollskills():
     dexterity.sort()
     dexterity.pop(0)
     for i in dexterity:
-        dexterity_sum = i + dexterity_sum
+        dexterity_sum = i + dexterity_sum + int(dexterity_bonus_int)
 
     constitution = []
     for i in range(4):
@@ -115,7 +136,7 @@ def rollskills():
     constitution.sort()
     constitution.pop(0)
     for i in constitution:
-        constitution_sum = i + constitution_sum
+        constitution_sum = i + constitution_sum + int(constitution_bonus_int)
 
     intelligence = []
     for i in range(4):
@@ -124,7 +145,7 @@ def rollskills():
     intelligence.sort()
     intelligence.pop(0)
     for i in intelligence:
-        intelligence_sum = i + intelligence_sum
+        intelligence_sum = i + intelligence_sum + int(intelligence_bonus_int)
 
     wisdom = []
     for i in range(4):
@@ -133,7 +154,7 @@ def rollskills():
     wisdom.sort()
     wisdom.pop(0)
     for i in wisdom:
-        wisdom_sum = i + wisdom_sum
+        wisdom_sum = i + wisdom_sum + int(wisdom_bonus_int)
 
     charisma = []
     for i in range(4):
@@ -142,17 +163,42 @@ def rollskills():
     charisma.sort()
     charisma.pop(0)
     for i in charisma:
-        charisma_sum = i + charisma_sum
+        charisma_sum = i + charisma_sum + int(charisma_bonus_int)
 
-    name_entry_win.destroy()
+    add_characterbonuses_win.destroy()
     showskills()
+
+def skillbonus_typecheck():
+    try:
+        num1 = int(strength_bonus.get())
+        num2 = int(dexterity_bonus.get())
+        num3 = int(constitution_bonus.get())
+        num4 = int(intelligence_bonus.get())
+        num5 = int(wisdom_bonus.get())
+        num6 = int(charisma_bonus.get())
+        
+        rollskills()
+    except ValueError:
+        messagebox.showerror('Error','Only numbers can be entered')
+
+
+def skillbonus_presencecheck():
+    if str(strength_bonus).strip():
+        if str(dexterity_bonus).strip():
+            if str(constitution_bonus).strip():
+                if str(intelligence_bonus).strip():
+                    if str(wisdom_bonus).strip():
+                        if str(charisma_bonus).strip():
+                            skillbonus_typecheck()
+    else:
+        messagebox.showerror('Error','All text boxes must have a number in. No bonus = 0')
 
 
 def add_characterbonuses():
     global add_characterbonuses_win, strength_bonus, dexterity_bonus, constitution_bonus, intelligence_bonus, wisdom_bonus, charisma_bonus
 
     add_characterbonuses_win = Toplevel()
-    add_characterbonuses_win.geometry('250x400+0+0')
+    add_characterbonuses_win.geometry('235x250+0+0')
     add_characterbonuses_win.resizable(False,False)
     add_characterbonuses_win.title('DND Skill Roller')
 
@@ -242,7 +288,7 @@ def add_characterbonuses():
     )
     intelligence_label.grid(
         row=8,
-        column=2
+        column=1
     )
     intelligence_bonus = tk.Entry(
         add_characterbonuses_win,
@@ -265,7 +311,7 @@ def add_characterbonuses():
     )
     wisdom_bonus = tk.Entry(
         add_characterbonuses_win,
-        text='Wisdom:',
+        width=5,
         font=('Arial')
     )
     wisdom_bonus.grid(
@@ -276,7 +322,7 @@ def add_characterbonuses():
     charisma_label = tk.Label(
         add_characterbonuses_win,
         text='Charisma:',
-        font=('Arial')
+        font=('Arial',15)
     )
     charisma_label.grid(
         row=10,
@@ -297,7 +343,7 @@ def add_characterbonuses():
         text='Continue',
         font=('Arial'),
         width=20,
-        command=skillbonus_check
+        command=skillbonus_presencecheck
     )
     continue_button.grid(
         row=12,
@@ -345,6 +391,31 @@ def name_entry():
     )
     name_entry_win_submit_btn.pack()
 
+def reset_sum_values():
+    global strength_sum, dexterity_sum, constitution_sum, intelligence_sum, wisdom_sum, charisma_sum
+
+    strength_sum = 0
+    dexterity_sum = 0
+    constitution_sum = 0
+    intelligence_sum = 0
+    wisdom_sum = 0
+    charisma_sum = 0
+
+    name_entry()
+
+
+def reset_bonus_values():
+    global strength_bonus, dexterity_bonus, constitution_bonus, intelligence_bonus, wisdom_bonus, charisma_bonus
+    
+    strength_bonus = 0
+    dexterity_bonus = 0
+    constitution_bonus = 0
+    intelligence_bonus = 0
+    wisdom_bonus = 0
+    charisma_bonus = 0
+
+    reset_sum_values()
+
 
 root = tk.Tk()
 root.title('DND Skill Roller')
@@ -367,7 +438,7 @@ start_button = tk.Button(
     text='Start',
     font=('Arial'),
     width=20,
-    command=name_entry
+    command=reset_bonus_values
 )
 start_button.grid(
     row=2,

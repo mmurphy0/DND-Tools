@@ -14,3 +14,11 @@ Intelligence: 10
 Wisdom: 16
 Charisma: 17
 ----------
+Character: Vex
+Strength: 22
+Dexterity: 11
+Constitution: 20
+Intelligence: 16
+Wisdom: 9
+Charisma: 13
+----------
